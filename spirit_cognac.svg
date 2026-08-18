@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 500" width="100%" height="500">
+  <defs>
+    <linearGradient id="amberCognac" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4A1802"/>
+      <stop offset="35%" stop-color="#C25A04"/>
+      <stop offset="65%" stop-color="#FF9214"/>
+      <stop offset="100%" stop-color="#3D1201"/>
+    </linearGradient>
+    <linearGradient id="crystalCap" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#B8860B"/>
+      <stop offset="50%" stop-color="#FFF0A5"/>
+      <stop offset="100%" stop-color="#8B6508"/>
+    </linearGradient>
+  </defs>
+
+  <ellipse cx="150" cy="460" rx="100" ry="22" fill="rgba(0,0,0,0.65)"/>
+
+  <!-- Cognac Decanter Body -->
+  <path d="M 132,50 L 168,50 L 168,130 C 215,170 230,220 230,340 C 230,420 200,445 180,445 L 120,445 C 100,445 70,420 70,340 C 70,220 85,170 132,130 Z" fill="url(#amberCognac)" stroke="url(#crystalCap)" stroke-width="2"/>
+
+  <!-- Crystal Stopper Top -->
+  <polygon points="150,10 175,35 150,50 125,35" fill="url(#crystalCap)"/>
+  <rect x="135" y="48" width="30" height="25" fill="url(#crystalCap)"/>
+
+  <!-- Decanter Gold Neck Ring -->
+  <rect x="126" y="115" width="48" height="12" rx="3" fill="url(#crystalCap)"/>
+
+  <!-- Label (XO French Cognac) -->
+  <g transform="translate(95, 230)">
+    <rect x="0" y="0" width="110" height="140" rx="8" fill="#1C0A02" stroke="url(#crystalCap)" stroke-width="2.5"/>
+    <rect x="5" y="5" width="100" height="130" rx="5" fill="none" stroke="#D4AF37" stroke-width="1" stroke-dasharray="3,3"/>
+
+    <!-- Royal French Fleur-de-lis Crest -->
+    <path d="M 55,20 C 50,12 40,22 50,28 C 45,35 55,38 55,38 C 55,38 65,35 60,28 C 70,22 60,12 55,20 Z" fill="url(#crystalCap)"/>
+
+    <text x="55" y="55" font-family="'Cinzel', serif" font-size="14" font-weight="bold" fill="url(#crystalCap)" text-anchor="middle">COGNAC XO</text>
+    <text x="55" y="70" font-family="serif" font-size="8" font-style="italic" fill="#E6C280" text-anchor="middle">GRANDE CHAMPAGNE</text>
+
+    <line x1="25" y1="82" x2="85" y2="82" stroke="url(#crystalCap)" stroke-width="1"/>
+
+    <text x="55" y="98" font-family="'Cinzel', serif" font-size="9" fill="#FFF0A5" text-anchor="middle">AGED 25 YEARS</text>
+    <text x="55" y="112" font-family="serif" font-size="7" fill="#AAA" text-anchor="middle">FRANCE • 40% VOL</text>
+    <text x="55" y="125" font-family="sans-serif" font-size="6" fill="#8B6508" text-anchor="middle">700 ML</text>
+  </g>
+</svg>

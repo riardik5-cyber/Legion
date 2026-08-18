@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 500" width="100%" height="500">
+  <defs>
+    <linearGradient id="glass" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#150305"/>
+      <stop offset="35%" stop-color="#4A0812"/>
+      <stop offset="70%" stop-color="#28040A"/>
+      <stop offset="100%" stop-color="#0D0204"/>
+    </linearGradient>
+    <linearGradient id="goldCap" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8B6508"/>
+      <stop offset="50%" stop-color="#FFD700"/>
+      <stop offset="100%" stop-color="#A67C1E"/>
+    </linearGradient>
+    <radialGradient id="bottleShadow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="rgba(0,0,0,0.6)"/>
+      <stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+  </defs>
+
+  <ellipse cx="150" cy="460" rx="90" ry="20" fill="url(#bottleShadow)"/>
+
+  <!-- Bottle Body -->
+  <path d="M 130,40 L 170,40 L 170,110 C 170,150 205,170 205,230 L 205,430 C 205,445 195,450 180,450 L 120,450 C 105,450 95,445 95,430 L 95,230 C 95,170 130,150 130,110 Z" fill="url(#glass)"/>
+
+  <!-- Gold Cap Wax Seal -->
+  <path d="M 128,30 L 172,30 L 172,60 C 172,65 128,65 128,60 Z" fill="url(#goldCap)"/>
+  <circle cx="150" cy="75" r="14" fill="url(#goldCap)"/>
+  <path d="M 144,70 Q 150,65 156,70 Q 150,82 144,70" fill="#4A0812"/>
+
+  <!-- Label (Spanish Vintage Style with Crest & Grapes) -->
+  <g transform="translate(105, 230)">
+    <rect x="0" y="0" width="90" height="150" rx="5" fill="#F4E8C1" stroke="#D4AF37" stroke-width="2"/>
+    <rect x="4" y="4" width="82" height="142" rx="3" fill="none" stroke="#8B6508" stroke-width="1" stroke-dasharray="2,2"/>
+    
+    <!-- Spanish Crest -->
+    <path d="M 35,20 C 35,10 55,10 55,20 C 55,30 45,35 45,42 C 45,35 35,30 35,20 Z" fill="#8B0000"/>
+    <circle cx="45" cy="22" r="3" fill="#FFD700"/>
+
+    <!-- Text -->
+    <text x="45" y="60" font-family="'Cinzel', serif" font-size="10" font-weight="bold" fill="#3B0A11" text-anchor="middle">RIOJA</text>
+    <text x="45" y="73" font-family="serif" font-size="7" font-style="italic" fill="#8B6508" text-anchor="middle">RESERVA</text>
+    
+    <!-- Grape Cluster Icon -->
+    <g transform="translate(45, 95)" fill="#4A0812">
+      <circle cx="0" cy="-6" r="2.5"/><circle cx="-3" cy="-2" r="2.5"/><circle cx="3" cy="-2" r="2.5"/>
+      <circle cx="-5" cy="2" r="2"/><circle cx="0" cy="2" r="2"/><circle cx="5" cy="2" r="2"/>
+      <circle cx="-2.5" cy="6" r="1.8"/><circle cx="2.5" cy="6" r="1.8"/><circle cx="0" cy="9.5" r="1.5"/>
+    </g>
+
+    <text x="45" y="125" font-family="'Cinzel', serif" font-size="6" fill="#3B0A11" text-anchor="middle">ESPAÑA</text>
+    <text x="45" y="136" font-family="sans-serif" font-size="5" fill="#666" text-anchor="middle">13.5% VOL • 750 ML</text>
+  </g>
+
+  <!-- Gold Wire Mesh Effect for Spanish Rioja -->
+  <path d="M 95,230 L 205,430 M 205,230 L 95,430 M 95,290 L 205,350 M 95,350 L 205,290" stroke="url(#goldCap)" stroke-width="0.8" opacity="0.6" fill="none"/>
+</svg>

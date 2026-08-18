@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 500" width="100%" height="500">
+  <defs>
+    <linearGradient id="glassMo" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1A0208"/>
+      <stop offset="35%" stop-color="#4F0516"/>
+      <stop offset="70%" stop-color="#2D030C"/>
+      <stop offset="100%" stop-color="#100105"/>
+    </linearGradient>
+    <linearGradient id="goldCapMo" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8B6914"/>
+      <stop offset="50%" stop-color="#D4AF37"/>
+      <stop offset="100%" stop-color="#70530F"/>
+    </linearGradient>
+  </defs>
+
+  <ellipse cx="150" cy="460" rx="90" ry="20" fill="rgba(0,0,0,0.6)"/>
+
+  <!-- Bottle Body -->
+  <path d="M 130,40 L 170,40 L 170,115 C 170,150 202,170 202,230 L 202,430 C 202,445 192,450 178,450 L 122,450 C 108,450 98,445 98,430 L 98,230 C 98,170 130,150 130,115 Z" fill="url(#glassMo)"/>
+
+  <!-- Wax Seal Top -->
+  <rect x="128" y="32" width="44" height="28" fill="url(#goldCapMo)" rx="3"/>
+  <circle cx="150" cy="70" r="12" fill="#4F0516" stroke="url(#goldCapMo)" stroke-width="2"/>
+
+  <!-- Label (Moldovan Vintage PURCARI / CRICOVA style) -->
+  <g transform="translate(103, 220)">
+    <rect x="0" y="0" width="94" height="160" rx="4" fill="#FAF5EB" stroke="#D4AF37" stroke-width="2"/>
+    <path d="M 5,5 L 89,5 L 89,155 L 5,155 Z" fill="none" stroke="#4F0516" stroke-width="1"/>
+
+    <!-- Moldovan White Stork / Grapes Emblem -->
+    <path d="M 47,20 L 52,35 L 42,35 Z" fill="#D4AF37"/>
+    <circle cx="47" cy="38" r="6" fill="#4F0516"/>
+
+    <text x="47" y="60" font-family="'Cinzel', serif" font-size="10" font-weight="bold" fill="#4F0516" text-anchor="middle">PURCARI</text>
+    <text x="47" y="73" font-family="serif" font-size="7" font-style="italic" fill="#8B6914" text-anchor="middle">NEGRU DE PURCARI</text>
+    
+    <line x1="20" y1="85" x2="74" y2="85" stroke="#D4AF37" stroke-width="1"/>
+
+    <!-- Grapes -->
+    <g transform="translate(47, 102)" fill="#D4AF37">
+      <circle cx="0" cy="-6" r="2.5"/><circle cx="-3" cy="-2" r="2.5"/><circle cx="3" cy="-2" r="2.5"/>
+      <circle cx="-5" cy="2" r="2"/><circle cx="0" cy="2" r="2"/><circle cx="5" cy="2" r="2"/>
+      <circle cx="0" cy="8" r="1.8"/>
+    </g>
+
+    <text x="47" y="126" font-family="'Cinzel', serif" font-size="7" fill="#4F0516" text-anchor="middle">MOLDOVA</text>
+    <text x="47" y="140" font-family="sans-serif" font-size="5" fill="#666" text-anchor="middle">750 ML • 13% ALC</text>
+  </g>
+</svg>

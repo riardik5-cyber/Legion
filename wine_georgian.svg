@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 500" width="100%" height="500">
+  <defs>
+    <linearGradient id="glassGe" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#190403"/>
+      <stop offset="35%" stop-color="#400A08"/>
+      <stop offset="70%" stop-color="#210504"/>
+      <stop offset="100%" stop-color="#0F0202"/>
+    </linearGradient>
+    <linearGradient id="terracotta" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8B3A2B"/>
+      <stop offset="50%" stop-color="#CD5C5C"/>
+      <stop offset="100%" stop-color="#722F24"/>
+    </linearGradient>
+    <linearGradient id="goldGe" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#B8860B"/>
+      <stop offset="50%" stop-color="#FFD700"/>
+      <stop offset="100%" stop-color="#9A7B0C"/>
+    </linearGradient>
+  </defs>
+
+  <ellipse cx="150" cy="460" rx="90" ry="20" fill="rgba(0,0,0,0.6)"/>
+
+  <!-- Bottle Body -->
+  <path d="M 128,40 L 172,40 L 172,110 C 172,150 205,170 205,230 L 205,430 C 205,445 195,450 180,450 L 120,450 C 105,450 95,445 95,430 L 95,230 C 95,170 128,150 128,110 Z" fill="url(#glassGe)"/>
+
+  <!-- Clay/Wax Seal Cap -->
+  <path d="M 126,30 L 174,30 L 174,62 Q 150,75 126,62 Z" fill="url(#terracotta)"/>
+  <circle cx="150" cy="80" r="14" fill="url(#terracotta)" stroke="url(#goldGe)" stroke-width="1.5"/>
+  <!-- Georgian Bolnisi Cross Emblem -->
+  <path d="M 150,72 L 150,88 M 142,80 L 158,80" stroke="url(#goldGe)" stroke-width="2.5" stroke-linecap="square"/>
+
+  <!-- Label (Georgian Kindzmarauli / Khvanchkara style) -->
+  <g transform="translate(102, 220)">
+    <rect x="0" y="0" width="96" height="160" rx="4" fill="#F5EBE0" stroke="#8B3A2B" stroke-width="2"/>
+    <rect x="5" y="5" width="86" height="150" rx="2" fill="none" stroke="url(#goldGe)" stroke-width="1.5"/>
+
+    <!-- Georgian Ornamental Motif -->
+    <path d="M 48,15 C 38,25 38,35 48,42 C 58,35 58,25 48,15 Z" fill="url(#terracotta)"/>
+    <circle cx="48" cy="28.5" r="3" fill="url(#goldGe)"/>
+
+    <text x="48" y="60" font-family="'Cinzel', serif" font-size="10" font-weight="bold" fill="#400A08" text-anchor="middle">KINDZMARAULI</text>
+    <text x="48" y="73" font-family="serif" font-size="7" fill="#8B3A2B" text-anchor="middle">SAPERAVI VINTAGE</text>
+    
+    <!-- Grapevine Scroll -->
+    <path d="M 25,85 Q 48,95 71,85" stroke="url(#goldGe)" stroke-width="1.5" fill="none"/>
+
+    <text x="48" y="112" font-family="'Cinzel', serif" font-size="8" fill="#400A08" text-anchor="middle">GEORGIA</text>
+    <text x="48" y="126" font-family="serif" font-size="6" font-style="italic" fill="#777" text-anchor="middle">QVEVRI TRADITION</text>
+    <text x="48" y="142" font-family="sans-serif" font-size="5" fill="#888" text-anchor="middle">750 ML • 12.5% ALC</text>
+  </g>
+</svg>

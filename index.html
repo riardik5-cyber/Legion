@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="siteTitle">Легион — Сеть магазинов качественного алкоголя</title>
+  <meta name="description" content="Каталог сети магазинов «Легион»: элитные вина Франции, Испании, Италии, Молдовы, Грузии, а также благородный коньяк, виски и премиальная водка.">
+  
+  <!-- CSS Stylesheet References (Subfolder + Root compatibility) -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+
+  <!-- EMBEDDED INLINE STYLES FOR GUARANTEED GITHUB PAGES STYLING -->
+  <style>
+    :root {
+      --bg-dark: #1A0306;
+      --bg-card: #27060B;
+      --bg-card-hover: #36090F;
+      --parchment: #F8F3E6;
+      --parchment-dark: #EAE1CB;
+      --gold-primary: #D4AF37;
+      --gold-light: #FFF0A5;
+      --gold-dark: #8B6508;
+      --gold-gradient: linear-gradient(135deg, #B8860B 0%, #FFD700 50%, #8B6508 100%);
+      --burgundy-gradient: linear-gradient(180deg, #4A0E17 0%, #200408 100%);
+      --text-light: #F8F3E6;
+      --text-muted: #D1B894;
+      --text-dark: #2C0C10;
+      --border-gold: rgba(212, 175, 55, 0.4);
+      --shadow-gold: 0 10px 30px rgba(212, 175, 55, 0.15);
+      --shadow-card: 0 15px 35px rgba(0, 0, 0, 0.6);
+      --font-gothic: 'UnifrakturMaguntia', 'Cinzel', serif;
+      --font-heading: 'Cinzel', 'Times New Roman', serif;
+      --font-body: 'Cormorant Garamond', 'Georgia', serif;
+      --radius: 8px;
+      --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg-dark);
+      background-image: 
+        radial-gradient(circle at 50% 0%, #3B0A11 0%, #1A0306 70%),
+        url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 30L15 15M30 30L45 15M30 30L15 45M30 30L45 45' stroke='%233B0A11' stroke-width='0.5' fill='none' opacity='0.3'/%3E%3C/svg%3E");
+      color: var(--text-light); font-family: var(--font-body); font-size: 18px; line-height: 1.6; min-height: 100vh; overflow-x: hidden;
+    }
+    a { color: var(--gold-primary); text-decoration: none; transition: var(--transition); }
+    button { cursor: pointer; font-family: var(--font-heading); border: none; outline: none; }
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 20px; }
+    .medieval-header { background: var(--burgundy-gradient); border-bottom: 3px solid var(--gold-primary); box-shadow: 0 5px 25px rgba(0, 0, 0, 0.8); position: relative; z-index: 100; }
+    .header-top-bar { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid var(--border-gold); }
+    .brand-wrapper { display: flex; align-items: center; gap: 18px; }
+    .brand-logo { width: 75px; height: 75px; object-fit: contain; filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.4)); transition: var(--transition); }
+    .brand-logo:hover { transform: scale(1.05) rotate(-2deg); }
+    .brand-titles h1 { font-family: var(--font-heading); font-size: 2.2rem; letter-spacing: 4px; background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9); line-height: 1.1; }
+    .brand-titles p { font-size: 1rem; color: var(--text-muted); font-style: italic; letter-spacing: 1px; }
+    .lang-switcher { display: flex; background: rgba(0, 0, 0, 0.4); border: 1px solid var(--gold-primary); border-radius: 30px; padding: 4px; box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.5); }
+    .lang-btn { background: transparent; color: var(--text-muted); font-family: var(--font-heading); font-size: 0.9rem; font-weight: 700; padding: 6px 16px; border-radius: 20px; transition: var(--transition); }
+    .lang-btn.active, .lang-btn:hover { background: var(--gold-gradient); color: var(--text-dark); box-shadow: 0 2px 8px rgba(212, 175, 55, 0.5); }
+    .main-nav { display: flex; justify-content: center; padding: 12px 0; gap: 15px; flex-wrap: wrap; }
+    .nav-tab { background: rgba(42, 8, 14, 0.8); color: var(--text-light); font-family: var(--font-heading); font-size: 1.1rem; letter-spacing: 1.5px; padding: 10px 24px; border: 1px solid var(--border-gold); border-radius: 4px; position: relative; overflow: hidden; transition: var(--transition); }
+    .nav-tab::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--gold-gradient); opacity: 0; transition: var(--transition); }
+    .nav-tab:hover, .nav-tab.active { background: #4A0E17; color: var(--gold-light); border-color: var(--gold-primary); box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2); }
+    .nav-tab.active::before { opacity: 1; }
+    .hero-banner { background: url('images/grape_banner.png') center/cover no-repeat; position: relative; padding: 60px 0; text-align: center; border-bottom: 2px solid var(--gold-primary); }
+    .hero-banner::before { content: ''; position: absolute; top:0; left:0; right:0; bottom:0; background: linear-gradient(180deg, rgba(26, 3, 6, 0.85) 0%, rgba(39, 6, 11, 0.75) 50%, rgba(26, 3, 6, 0.9) 100%); }
+    .hero-content { position: relative; z-index: 2; }
+    .hero-title { font-family: var(--font-heading); font-size: 2.8rem; color: var(--gold-light); text-shadow: 0 4px 15px rgba(0, 0, 0, 0.9); margin-bottom: 10px; }
+    .hero-subtitle { font-size: 1.3rem; color: var(--text-muted); font-style: italic; }
+    .ornament-divider { margin: 20px auto; max-width: 600px; display: block; }
+    .search-section { padding: 30px 0 10px; }
+    .search-box { max-width: 650px; margin: 0 auto; position: relative; }
+    .search-input { width: 100%; padding: 14px 20px 14px 50px; background: rgba(39, 6, 11, 0.9); border: 2px solid var(--gold-primary); border-radius: 30px; color: var(--text-light); font-family: var(--font-body); font-size: 1.1rem; outline: none; box-shadow: inset 0 2px 10px rgba(0,0,0,0.8), 0 0 15px rgba(212, 175, 55, 0.1); transition: var(--transition); }
+    .search-input:focus { box-shadow: inset 0 2px 10px rgba(0,0,0,0.8), 0 0 25px rgba(212, 175, 55, 0.4); border-color: var(--gold-light); }
+    .search-icon { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color: var(--gold-primary); font-size: 1.2rem; }
+    .filter-controls { padding: 20px 0 30px; }
+    .filter-group { margin-bottom: 20px; text-align: center; }
+    .filter-label { font-family: var(--font-heading); color: var(--gold-primary); font-size: 1.1rem; margin-bottom: 12px; display: block; }
+    .badge-wrapper { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; }
+    .badge-btn { background: rgba(39, 6, 11, 0.7); color: var(--text-muted); border: 1px solid rgba(212, 175, 55, 0.3); padding: 8px 18px; border-radius: 20px; font-size: 1rem; font-family: var(--font-body); transition: var(--transition); }
+    .badge-btn:hover, .badge-btn.active { background: var(--gold-gradient); color: var(--text-dark); border-color: var(--gold-light); font-weight: 600; box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3); }
+    .section-header { text-align: center; margin: 40px 0 30px; position: relative; }
+    .section-title { font-family: var(--font-heading); font-size: 2.2rem; color: var(--gold-light); display: inline-block; position: relative; padding: 0 20px; }
+    .catalog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; padding-bottom: 60px; }
+    .product-card { background: var(--bg-card); border: 2px solid var(--border-gold); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; box-shadow: var(--shadow-card); position: relative; transition: var(--transition); }
+    .product-card:hover { transform: translateY(-8px); border-color: var(--gold-primary); box-shadow: 0 15px 35px rgba(212, 175, 55, 0.25); background: var(--bg-card-hover); }
+    .card-badge-container { position: absolute; top: 12px; left: 12px; right: 12px; display: flex; justify-content: space-between; z-index: 5; pointer-events: none; }
+    .card-badge { background: rgba(26, 3, 6, 0.85); border: 1px solid var(--gold-primary); color: var(--gold-light); font-family: var(--font-heading); font-size: 0.75rem; padding: 3px 10px; border-radius: 12px; text-transform: uppercase; letter-spacing: 1px; }
+    .card-badge-type { background: var(--gold-gradient); color: var(--text-dark); font-weight: 700; }
+    .card-image-wrapper { background: radial-gradient(circle, #3D0B12 0%, #170205 100%); padding: 30px 20px 20px; text-align: center; position: relative; border-bottom: 1px solid var(--border-gold); height: 280px; display: flex; align-items: center; justify-content: center; }
+    .product-image { max-height: 240px; max-width: 100%; object-fit: contain; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.7)); transition: var(--transition); }
+    .product-card:hover .product-image { transform: scale(1.08) translateY(-4px); }
+    .card-body { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; }
+    .product-title { font-family: var(--font-heading); font-size: 1.35rem; color: var(--gold-light); margin-bottom: 8px; line-height: 1.2; }
+    .product-desc { font-size: 1rem; color: var(--text-muted); margin-bottom: 15px; flex-grow: 1; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+    .card-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 15px; border-top: 1px dashed var(--border-gold); margin-top: auto; }
+    .product-price-wrapper { display: flex; flex-direction: column; }
+    .price-label { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; }
+    .product-price { font-family: var(--font-heading); font-size: 1.35rem; font-weight: 700; color: var(--gold-primary); text-shadow: 0 1px 3px rgba(0,0,0,0.8); }
+    .btn-details { background: var(--gold-gradient); color: var(--text-dark); font-family: var(--font-heading); font-weight: 700; font-size: 0.9rem; padding: 8px 16px; border-radius: 4px; transition: var(--transition); }
+    .btn-details:hover { box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4); transform: scale(1.04); }
+    .editable-banner { background: rgba(212, 175, 55, 0.1); border: 1px solid var(--border-gold); border-radius: var(--radius); padding: 12px 20px; margin-bottom: 25px; font-size: 0.95rem; color: var(--gold-light); text-align: center; }
+    .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(5px); z-index: 1000; display: flex; align-items: center; justify-content: center; padding: 20px; opacity: 0; pointer-events: none; transition: var(--transition); }
+    .modal-overlay.open { opacity: 1; pointer-events: auto; }
+    .modal-card { background: var(--parchment); color: var(--text-dark); border: 3px solid var(--gold-primary); border-radius: var(--radius); max-width: 750px; width: 100%; display: flex; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.9); position: relative; transform: scale(0.9); transition: var(--transition); }
+    .modal-overlay.open .modal-card { transform: scale(1); }
+    .modal-close { position: absolute; top: 15px; right: 15px; background: #3B0A11; color: var(--gold-light); width: 36px; height: 36px; border-radius: 50%; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; border: 1px solid var(--gold-primary); transition: var(--transition); z-index: 10; }
+    .modal-close:hover { background: #5A101B; transform: rotate(90deg); }
+    .modal-image-col { width: 40%; background: radial-gradient(circle, #3D0B12 0%, #1A0306 100%); padding: 30px; display: flex; align-items: center; justify-content: center; }
+    .modal-image { max-height: 320px; max-width: 100%; object-fit: contain; filter: drop-shadow(0 15px 25px rgba(0,0,0,0.8)); }
+    .modal-info-col { width: 60%; padding: 35px 30px; display: flex; flex-direction: column; }
+    .modal-title { font-family: var(--font-heading); font-size: 1.8rem; color: #3B0A11; margin-bottom: 10px; }
+    .modal-badge-group { display: flex; gap: 8px; margin-bottom: 15px; }
+    .modal-badge { background: #3B0A11; color: var(--gold-light); font-size: 0.8rem; padding: 4px 12px; border-radius: 12px; font-family: var(--font-heading); }
+    .modal-price { font-family: var(--font-heading); font-size: 1.8rem; font-weight: 700; color: #8B0000; margin-bottom: 15px; }
+    .modal-advantages-box { background: var(--parchment-dark); border-left: 3px solid var(--gold-dark); padding: 15px; border-radius: 4px; margin-bottom: 20px; }
+    .modal-advantages-title { font-family: var(--font-heading); font-weight: 700; color: #3B0A11; margin-bottom: 5px; font-size: 1.05rem; }
+    .modal-desc { font-size: 1.05rem; color: #444; line-height: 1.5; }
+    .medieval-footer { background: #110204; border-top: 2px solid var(--gold-primary); padding: 40px 0 20px; text-align: center; margin-top: 40px; }
+    .footer-info { font-size: 0.95rem; color: var(--text-muted); max-width: 800px; margin: 0 auto 20px; font-style: italic; }
+    .footer-copy { font-family: var(--font-heading); color: var(--gold-primary); font-size: 0.9rem; }
+    @media (max-width: 900px) { .hero-title { font-size: 2rem; } .brand-titles h1 { font-size: 1.7rem; } .modal-card { flex-direction: column; } .modal-image-col, .modal-info-col { width: 100%; } .modal-image-col { height: 220px; padding: 20px; } }
+    @media (max-width: 600px) { .header-top-bar { flex-direction: column; gap: 15px; text-align: center; } .brand-wrapper { flex-direction: column; text-align: center; } .catalog-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <!-- Medieval Header Section -->
+  <header class="medieval-header">
+    <div class="container">
+      <div class="header-top-bar">
+        <!-- Logo & Brand Title -->
+        <div class="brand-wrapper">
+          <img src="images/logo.png" alt="Легион Герб" class="brand-logo">
+          <div class="brand-titles">
+            <h1 data-i18n="brandName">ЛЕГИОН</h1>
+            <p data-i18n="brandTagline">Сеть магазинов элитных вин и крепких напитков</p>
+          </div>
+        </div>
+
+        <!-- Language Switcher (RU, UZ, EN) -->
+        <div class="lang-switcher">
+          <button class="lang-btn active" data-lang="ru">RU</button>
+          <button class="lang-btn" data-lang="uz">UZ</button>
+          <button class="lang-btn" data-lang="en">EN</button>
+        </div>
+      </div>
+
+      <!-- Main Section Navigation Tabs -->
+      <nav class="main-nav">
+        <button class="nav-tab active" data-category="all" data-i18n="navAll">Все товары</button>
+        <button class="nav-tab" data-category="wines" data-i18n="navWines">Вина</button>
+        <button class="nav-tab" data-category="spirits" data-i18n="navSpirits">Крепкие напитки</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Grape Banner -->
+  <section class="hero-banner">
+    <div class="container hero-content">
+      <h2 class="hero-title" data-i18n="heroTitle">Изысканная коллекция вин и благородных напитков</h2>
+      <p class="hero-subtitle" data-i18n="heroSubtitle">Традиции качества и дух французской классики</p>
+      <img src="images/grape_ornament_divider.svg" alt="Виноградный орнамент" class="ornament-divider">
+    </div>
+  </section>
+
+  <!-- Search & Filter Area -->
+  <main class="container">
+    
+    <!-- Search Bar -->
+    <section class="search-section">
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" class="search-input" placeholder="Поиск по названию или описанию...">
+      </div>
+    </section>
+
+    <!-- Interactive Sub-Filters -->
+    <section class="filter-controls">
+      
+      <!-- Country Subsections for Wines -->
+      <div class="filter-group" id="countryFilterWrapper">
+        <span class="filter-label" data-i18n="filterCountryLabel">Страна происхождения:</span>
+        <div class="badge-wrapper">
+          <button class="badge-btn active" data-country="french" data-i18n="countryFrench">Французские</button>
+          <button class="badge-btn" data-country="spanish" data-i18n="countrySpanish">Испанские</button>
+          <button class="badge-btn" data-country="italian" data-i18n="countryItalian">Итальянские</button>
+          <button class="badge-btn" data-country="moldovan" data-i18n="countryMoldovan">Молдавские</button>
+          <button class="badge-btn" data-country="georgian" data-i18n="countryGeorgian">Грузинские</button>
+        </div>
+      </div>
+
+      <!-- Wine Types Filter -->
+      <div class="filter-group" id="typeFilterWrapper">
+        <span class="filter-label" data-i18n="filterTypeLabel">Категория вина:</span>
+        <div class="badge-wrapper">
+          <button class="badge-btn active" data-wine-type="dry" data-i18n="typeDry">Сухое</button>
+          <button class="badge-btn" data-wine-type="semisweet" data-i18n="typeSemiSweet">Полусладкое</button>
+          <button class="badge-btn" data-wine-type="sweet" data-i18n="typeSweet">Сладкое</button>
+          <button class="badge-btn" data-wine-type="sparkling" data-i18n="typeSparkling">Игристое</button>
+        </div>
+      </div>
+
+      <!-- Spirits Subsections Filter -->
+      <div class="filter-group" id="spiritsFilterWrapper">
+        <span class="filter-label" data-i18n="filterSpiritLabel">Вид крепкого напитка:</span>
+        <div class="badge-wrapper">
+          <button class="badge-btn active" data-spirit-type="cognac" data-i18n="spiritCognac">Коньяк</button>
+          <button class="badge-btn" data-spirit-type="vodka" data-i18n="spiritVodka">Водка</button>
+          <button class="badge-btn" data-spirit-type="whiskey" data-i18n="spiritWhiskey">Виски</button>
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- Section Title -->
+    <div class="section-header">
+      <h2 class="section-title">Каталог Продукции «Легион»</h2>
+    </div>
+
+    <!-- CATALOG GRID (29 Products: 20 Wines + 9 Spirits) -->
+    <div class="catalog-grid" id="catalogGrid">
+
+      <!-- ===================================================================
+           1. РАЗДЕЛ: ФРАНЦУЗСКИЕ ВИНА (FRENCH WINES)
+           =================================================================== -->
+
+      <!-- 1.1 Французское Сухое -->
+      <article class="product-card" data-category="wine" data-country="french" data-type="dry">
+        <div class="card-badge-container">
+          <span class="card-badge">Франция</span>
+          <span class="card-badge card-badge-type">Сухое</span>
+        </div>
+        <div class="card-image-wrapper">
+          <img src="images/wine_french.png" alt="Château de l'Étoile Bordeaux" class="product-image">
+        </div>
+        <div class="card-body">
+          <h3 class="product-title">Château de l'Étoile Margaux</h3>
+          <p class="product-desc">Выдержанное сухое красное вино с богатым ароматом черных ягод, нотами дуба и бархатистыми танинами. Идеально к дичи и выдержанным сырам.</p>
+          <div class="card-footer">
+            <div class="product-price-wrapper">
+              <span class="price-label" data-i18n="priceLabel">Цена:</span>
+              <span class="product-price">340 000 сум</span>
+            </div>
+            <button class="btn-details" data-i18n="btnDetails">Подробнее</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 1.2 Французское Полусладкое -->
+      <article class="product-card" data-category="wine" data-country="french" data-type="semisweet">
+        <div class="card-badge-container">
+          <span class="card-badge">Франция</span>
+          <span class="card-badge card-badge-type">Полусладкое</span>
+        </div>
+        <div class="card-image-wrapper">
+          <img src="images/wine_french.png" alt="Rosé d'Anjou Val de Loire" class="product-image">
+        </div>
+        <div class="card-body">
+          <h3 class="product-title">Rosé d'Anjou Val de Loire</h3>
+          <p class="product-desc">Изысканное полусладкое розовое вино Долины Луары. Обладает нежным ароматом спелой клубники, малины и свежим фруктовым послевкусием.</p>
+          <div class="card-footer">
+            <div class="product-price-wrapper">
+              <span class="price-label" data-i18n="priceLabel">Цена:</span>
+              <span class="product-price">280 000 сум</span>
+            </div>
+            <button class="btn-details" data-i18n="btnDetails">Подробнее</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 1.3 Французское Сладкое -->
+      <article class="product-card" data-category="wine" data-country="french" data-type="sweet">
+        <div class="card-badge-container">
+          <span class="card-badge">Франция</span>
+          <span class="card-badge card-badge-type">Сладкое</span>
+        </div>
+        <div class="card-image-wrapper">
+          <img src="images/wine_french.png" alt="Sauternes Grand Reserve" class="product-image">
+        </div>
+        <div class="card-body">
+          <h3 class="product-title">Sauternes Grand Reserve</h3>
+          <p class="product-desc">Легендарное десертное сладкое вино Бордо. Медовые оттенки, цукаты, курага и белый персик создают неповторимую гармонию вкуса.</p>
+          <div class="card-footer">
+            <div class="product-price-wrapper">
+              <span class="price-label" data-i18n="priceLabel">Цена:</span>
+              <span class="product-price">520 000 сум</span>
+            </div>
+            <button class="btn-details" data-i18n="btnDetails">Подробнее</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 1.4 Французское Игристое -->
+      <article class="product-card" data-category="wine" data-country="french" data-type="sparkling">
+        <div class="card-badge-container">
+          <span class="card-badge">Франция</span>
+          <span class="card-badge card-badge-type">Игристое</span>
+        </div>
+        <div class="card-image-wrapper">
+          <img src="images/wine_french.png" alt="Champagne Royal Brut" class="product-image">
+        </div>
+        <div class="card-body">
+          <h3 class="product-title">Champagne Royal Brut</h3>
+          <p class="product-desc">Классическое французское шампанское тонкого перляжа. Свежий аромат зеленого яблока, цитрусов и запеченной бриоши. Символ торжества.</p>
+          <div class="card-footer">
+            <div class="product-price-wrapper">
+              <span class="price-label" data-i18n="priceLabel">Цена:</span>
+              <span class="product-price">780 000 сум</span>
+            </div>
+            <button class="btn-details" data-i18n="btnDetails">Подробнее</button>
+          </div>
+        </div>
+      </article>
+
+
+      <!-- ===================================================================
+           2. РАЗДЕЛ: ИСПАНСКИЕ ВИНА (SPANISH WINES)
+           =================================================================== -->
+
+      <!-- 2.1 Испанское Сухое -->
+      <article class="product-card" data-category="wine" data-country="spanish" data-type="dry">
+        <div class="card-badge-container">
+          <span class="card-badge">Испания</span>
+          <span class="card-badge card-badge-type">Сухое</span>
+        </div>
+        <div class="card-image-wrapper">
+          <img src="images/wine_spanish.svg" alt="Rioja Gran Reserva" class="product-image">
+        </div>
+        <div class="card-body">
+          <h3 class="product-title">Rioja Gran Reserva Vintage</h3>
+          <p class="product-desc">Благородное испанское сухое вино из сорта Темпранильо. Выдержано в американском дубе 24 месяца. Пряности, вишня и ваниль в аромате.</p>
+          <div class="card-footer">
+            <div class="product-price-wrapper">
+              <span class="price-label" data-i18n="priceLabel">Цена:</span>
+              <span class="product-price">390 000 сум</span>
+            </div>
+            <button class="btn-details" data-i18n="btnDetails">Подробнее</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 2.2 Испанское Полусладкое -->
+      <article class="product-card" data-category="wine" data-country="spanish" data-type="semisweet">
+        <div class="card-badge-container">
+          <span class="card-badge">Испания</span>
+          <span class="card-badge card-badge-type">Полусладкое</span>
+        </div>
+        <div class="card-image-wrapper">
+          <img src="images/wine_spanish.svg" alt="Sangre de Toro Semi-Dulce" class="product-image">
+        </div>
+        <div class="card-body">
+          <h3 class="product-title">Sangre de Toro Semi-Dulce</h3>
+          <p class="product-desc">Мягкое полусладкое красное вино с насыщенными тонами спелой сливы, граната и темных ягод. Прекрасный аккомпанемент к мясным блюдам.</p>
+          <div class="card-footer">
+            <div class="product-price-wrapper">
+              <span class="price-label" data-i18n="priceLabel">Цена:</span>
+              <span class="product-price">250 000 сум</span>
+            </div>
+            <button class="btn-details" data-i18n="btnDetails">Подробнее</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 2.3 Испанское Сладкое -->
+      <article class="product-card" data-category="wine" data-country="spanish" data-type="sweet">
+        <div class="card-badge-container">
+          <span class="card-badge">Испания</span>
+          <span class="card-badge card-badge-type">Сладкое</span>
+        </div>
+        <div class="card-image-wrapper">
+          <img src="images/wine_spanish.svg" alt="Pedro Ximénez Solera" class="product-image">
+        </div>
+        <div class="card-body">
+          <h3 class="product-title">Pedro Ximénez Solera Sherry</h3>
+          <p class="product-desc">Густое сладкое испанское вино с оттенками изюма, инжира, шоколада и какао. Обладает тягучим бархатным вкусом и долгим послевкусием.</p>
+          <div class="card-footer">
+            <div class="product-price-wrapper">
+              <span class="price-label" data-i18n="priceLabel">Цена:</span>
+              <span class="product-price">410 000 сум</span>
+            </div>
+            <button class="btn-details" data-i18n="btnDetails">Подробнее</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 2.4 Испанское Игристое -->
+      <article class="product-card" data-category="wine" data-country="spanish" data-type="sparkling">
+        <div class="card-badge-container">
+          <span class="card-badge">Испания</span>
+          <span class="card-badge card-badge-type">Игристое</span>
+        </div>
+        <div class="card-image-wrapper">
+          <img src="images/wine_spanish.svg" alt="Cava Freixenet Brut" class="product-image">
+        </div>
+        <div class="card-body">
+          <h3 class="product-title">Cava Premium Reserva Brut</h3>
+          <p class="product-desc">Знаменитая испанская Кава традиционной бутылочной ферментации. Освежающий тонкий вкус с нюансами миндаля, груши и белых цветов.</p>
+          <div class="card-footer">
+            <div class="product-price-wrapper">
+              <span class="price-label" data-i18n="priceLabel">Цена:</span>
+              <span class="product-price">310 000 сум</span>
+            </div>
+            <button class="btn-details" data-i18n="btnDetails">Подробнее</button>
+          </div>
+        </div>
+      </article>
+
+
+      <!-- ===================================================================
+           3. РАЗДЕЛ: ИТАЛЬЯНСКИЕ ВИНА (ITALIAN WINES)
+           =================================================================== -->
+
+      <!-- 3.1 Итальянское Сухое -->
+      <article class="product-card" data-category="wine" data-country="italian" data-type="dry">
+        <div class="card-badge-container">
+          <span class="card-badge">Италия</span>
+          <span class="card-badge card-badge-type">Сухое</span>
+        </div>
+        <div class="card-image-wrapper">
+          <img src="images/wine_italian.svg" alt="Chianti Classico Riserva" class="product-image">
+        </div>
+        <div class="card-body">
+          <h3 class="product-title">Chianti Classico Riserva DOCG</h3>
+          <p class="product-desc">Аристократичное итальянское сухое вино из Тосканы. Яркий букет вяленой вишни, фиалки, пряных трав и благородного дуба.</p>
+          <div class="card-footer">
+            <div class="product-price-wrapper">
+              <span class="price-label" data-i18n="priceLabel">Цена:</span>
+              <span class="product-price">360 000 сум</span>
+            </div>
+            <button class="btn-details" data-i18n="btnDetails">Подробнее</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 3.2 Итальянское Полусладкое -->
+      <article class="product-card" data-category="wine" data-country="italian" data-type="semisweet">
+        <div class="card-badge-container">
+          <span class="card-badge">Италия</span>
+          <span class="card-badge card-badge-type">Полусладкое</span>
+        </div>
+        <div class="card-image-wrapper">
+          <img src="images/wine_italian.svg" alt="Lambrusco dell'Emilia Rosso" class="product-image">
+        </div>
+        <div class="card-body">
+          <h3 class="product-title">Lambrusco dell'Emilia Amabile</h3>
+          <p class="product-desc">Легкое полусладкое итальянское вино с легкой игристостью. Сочные ноты черешни, ежевики и освежающий баланс сладости.</p>
+          <div class="card-footer">
+            <div class="product-price-wrapper">
+              <span class="price-label" data-i18n="priceLabel">Цена:</span>
+              <span class="product-price">220 000 сум</span>
+            </div>
+            <button class="btn-details" data-i18n="btnDetails">Подробнее</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 3.3 Итальянское Сладкое -->
+      <article class="product-card" data-category="wine" data-country="italian" data-type="sweet">
+        <div class="card-badge-container">
+          <span class="card-badge">Италия</span>
+          <span class="card-badge card-badge-type">Сладкое</span>
+        </div>
+        <div class="card-image-wrapper">
+          <img src="images/wine_italian.svg" alt="Vin Santo del Chianti" class="product-image">
+        </div>
+        <div class="card-body">
+          <h3 class="product-title">Vin Santo del Chianti Sweet</h3>
+          <p class="product-desc">Традиционное тосканское «священное вино». Изготовлено из подвяленного винограда. Ноты кураги, орехов и кленового сиропа.</p>
+          <div class="card-footer">
+            <div class="product-price-wrapper">
+              <span class="price-label" data-i18n="priceLabel">Цена:</span>
+              <span class="product-price">460 000 сум</span>
+            </div>
+            <button class="btn-details" data-i18n="btnDetails">Подробнее</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 3.4 Итальянское Игристое -->
+      <article class="product-card" data-category="wine" data-country="italian" data-type="sparkling">
+        <div class="card-badge-container">
+          <span class="card-badge">Италия</span>
+          <span class="card-badge card-badge-type">Игристое</span>
+        </div>
+        <div class="card-image-wrapper">
+          <img src="images/wine_italian.svg" alt="Prosecco Valdobbiadene" class="product-image">
+        </div>
+        <div class="card-body">
+          <h3 class="product-title">Prosecco Superiore Valdobbiadene</h3>
+          <p class="product-desc">Премиальное итальянское Просекко. Нежнейшие пузырьки, ароматы персика, спелой глицинии и зеленого яблока. Отличный аперитив.</p>
+          <div class="card-footer">
+            <div class="product-price-wrapper">
+              <span class="price-label" data-i18n="priceLabel">Цена:</span>
+              <span class="product-price">290 000 сум</span>
+            </div>
+            <button class="btn-details" data-i18n="btnDetails">Подробнее</button>
+          </div>
+        </div>
+      </article>
+
+
+      <!-- ===================================================================
+           4. РАЗДЕЛ: МОЛДАВСКИЕ ВИНА (MOLDOVAN WINES)
+           =================================================================== -->
+
+      <!-- 4.1 Молдавское Сухое -->
+      <article class="product-card" data-category="wine" data-country="moldovan" data-type="dry">
+        <div class="card-badge-container">
+          <span class="card-badge">Молдова</span>
+          <span class="card-badge card-badge-type">Сухое</span>
+        </div>
+        <div class="card-image-wrapper">
+          <img src="images/wine_moldovan.svg" alt="Negru de Purcari Vintage" class="product-image">
+        </div>
+        <div class="card-body">
+          <h3 class="product-title">Negru de Purcari Vintage</h3>
+          <p class="product-desc">Легендарное молдавское сухое вино с богатой историей. Глубокий рубиновый цвет, ароматы чернослива, дуба и дикой вишни.</p>
+          <div class="card-footer">
+            <div class="product-price-wrapper">
+              <span class="price-label" data-i18n="priceLabel">Цена:</span>
+              <span class="product-price">310 000 сум</span>
+            </div>
+            <button class="btn-details" data-i18n="btnDetails">Подробнее</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 4.2 Молдавское Полусладкое -->
+      <article class="product-card" data-category="wine" data-country="moldovan" data-type="semisweet">
+        <div class="card-badge-container">
+          <span class="card-badge">Молдова</span>
+          <span class="card-badge card-badge-type">Полусладкое</span>
+        </div>
+        <div class="card-image-wrapper">
+          <img src="images/wine_moldovan.svg" alt="Muscat Moldovenesc Semi-Sweet" class="product-image">
+        </div>
+        <div class="card-body">
+          <h3 class="product-title">Muscat Moldovenesc Reserve</h3>
+          <p class="product-desc">Ароматное полусладкое белое вино. Яркий мускатный букет с оттенками чайной розы, спелой дыни и южного персика.</p>
+          <div class="card-footer">
+            <div class="product-price-wrapper">
+              <span class="price-label" data-i18n="priceLabel">Цена:</span>
+              <span class="product-price">190 000 сум</span>
+            </div>
+            <button class="btn-details" data-i18n="btnDetails">Подробнее</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 4.3 Молдавское Сладкое -->
+      <article class="product-card" data-category="wine" data-country="moldovan" data-type="sweet">
+        <div class="card-badge-container">
+          <span class="card-badge">Молдова</span>
+          <span class="card-badge card-badge-type">Сладкое</span>
+        </div>
+        <div class="card-image-wrapper">
+          <img src="images/wine_moldovan.svg" alt="Kagor Pastoral Sweet" class="product-image">
+        </div>
+        <div class="card-body">
+          <h3 class="product-title">Kagor Pastoral Sweet Dessert</h3>
+          <p class="product-desc">Традиционное молдавское десертное вино высокой бархатистости. Бархатный вкус с нотами сушеной вишни, шоколада и сливок.</p>
+          <div class="card-footer">
+            <div class="product-price-wrapper">
+              <span class="price-label" data-i18n="priceLabel">Цена:</span>
+              <span class="product-price">210 000 сум</span>
+            </div>
+            <button class="btn-details" data-i18n="btnDetails">Подробнее</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 4.4 Молдавское Игристое -->
+      <article class="product-card" data-category="wine" data-country="moldovan" data-type="sparkling">
+        <div class="card-badge-container">
+          <span class="card-badge">Молдова</span>
+          <span class="card-badge card-badge-type">Игристое</span>
+        </div>
+        <div class="card-image-wrapper">
+          <img src="images/wine_moldovan.svg" alt="Cricova Spumant Clasic" class="product-image">
+        </div>
+        <div class="card-body">
+          <h3 class="product-title">Cricova Spumant Clasic Brut</h3>
+          <p class="product-desc">Выдержанное в подземных галереях Крикова классическое игристое вино. Тонкий цветочный аромат и свежий миндальный аккорд.</p>
+          <div class="card-footer">
+            <div class="product-price-wrapper">
+              <span class="price-label" data-i18n="priceLabel">Цена:</span>
+              <span class="product-price">240 000 сум</span>
+            </div>
+            <button class="btn-details" data-i18n="btnDetails">Подробнее</button>
+          </div>
+        </div>
+      </article>
+
+
+      <!-- ===================================================================
+           5. РАЗДЕЛ: ГРУЗИНСКИЕ ВИНА (GEORGIAN WINES)
+           =================================================================== -->
+
+      <!-- 5.1 Грузинское Сухое -->
+      <article class="product-card" data-category="wine" data-country="georgian" data-type="dry">
+        <div class="card-badge-container">
+          <span class="card-badge">Грузия</span>
+          <span class="card-badge card-badge-type">Сухое</span>
+        </div>
+        <div class="card-image-wrapper">
+          <img src="images/wine_georgian.svg" alt="Saperavi Qvevri Dry" class="product-image">
+        </div>
+        <div class="card-body">
+          <h3 class="product-title">Saperavi Qvevri Vintage</h3>
+          <p class="product-desc">Насыщенное грузинское сухое вино из винограда Саперави, выдержанное в глиняных квеври. Насыщенный гранатовый цвет и пряный букет.</p>
+          <div class="card-footer">
+            <div class="product-price-wrapper">
+              <span class="price-label" data-i18n="priceLabel">Цена:</span>
+              <span class="product-price">290 000 сум</span>
+            </div>
+            <button class="btn-details" data-i18n="btnDetails">Подробнее</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 5.2 Грузинское Полусладкое -->
+      <article class="product-card" data-category="wine" data-country="georgian" data-type="semisweet">
+        <div class="card-badge-container">
+          <span class="card-badge">Грузия</span>
+          <span class="card-badge card-badge-type">Полусладкое</span>
+        </div>
+        <div class="card-image-wrapper">
+          <img src="images/wine_georgian.svg" alt="Kindzmarauli Reserve" class="product-image">
+        </div>
+        <div class="card-body">
+          <h3 class="product-title">Kindzmarauli Authentic Reserve</h3>
+          <p class="product-desc">Знаменитое природно-полусладкое грузинское вино из микрозоны Киндзмараули. Бархатистый вкус спелой ежевики и лесной вишни.</p>
+          <div class="card-footer">
+            <div class="product-price-wrapper">
+              <span class="price-label" data-i18n="priceLabel">Цена:</span>
+              <span class="product-price">320 000 сум</span>
+            </div>
+            <button class="btn-details" data-i18n="btnDetails">Подробнее</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 5.3 Грузинское Сладкое -->
+      <article class="product-card" data-category="wine" data-country="georgian" data-type="sweet">
+        <div class="card-badge-container">
+          <span class="card-badge">Грузия</span>
+          <span class="card-badge card-badge-type">Сладкое</span>
+        </div>
+        <div class="card-image-wrapper">
+          <img src="images/wine_georgian.svg" alt="Khvanchkara Royal Sweet" class="product-image">
+        </div>
+        <div class="card-body">
+          <h3 class="product-title">Khvanchkara Royal Premium</h3>
+          <p class="product-desc">Жемчужина грузинского виноделия. Природно-сладкое вино с нежным оттенком горной малины, граната и обжаренного миндаля.</p>
+          <div class="card-footer">
+            <div class="product-price-wrapper">
+              <span class="price-label" data-i18n="priceLabel">Цена:</span>
+              <span class="product-price">480 000 сум</span>
+            </div>
+            <button class="btn-details" data-i18n="btnDetails">Подробнее</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 5.4 Грузинское Игристое -->
+      <article class="product-card" data-category="wine" data-country="georgian" data-type="sparkling">
+        <div class="card-badge-container">
+          <span class="card-badge">Грузия</span>
+          <span class="card-badge card-badge-type">Игристое</span>
+        </div>
+        <div class="card-image-wrapper">
+          <img src="images/wine_georgian.svg" alt="Bagrationi Classic Brut" class="product-image">
+        </div>
+        <div class="card-body">
+          <h3 class="product-title">Bagrationi 1882 Classic Brut</h3>
+          <p class="product-desc">Старейшее игристое вино Грузии. Изготовлено по классической методологии из автохтонных сортов. Нежный цитрусовый профиль.</p>
+          <div class="card-footer">
+            <div class="product-price-wrapper">
+              <span class="price-label" data-i18n="priceLabel">Цена:</span>
+              <span class="product-price">260 000 сум</span>
+            </div>
+            <button class="btn-details" data-i18n="btnDetails">Подробнее</button>
+          </div>
+        </div>
+      </article>
+
+
+      <!-- ===================================================================
+           6. РАЗДЕЛ: КРЕПКИЕ НАПИТКИ (SPIRITS SECTION)
+           =================================================================== -->
+
+      <!-- 6.1 Коньяк №1 -->
+      <article class="product-card" data-category="spirit" data-spirit="cognac">
+        <div class="card-badge-container">
+          <span class="card-badge">Коньяк</span>
+          <span class="card-badge card-badge-type">XO 25 Лет</span>
+        </div>
+        <div class="card-image-wrapper">
+          <img src="images/spirit_cognac.svg" alt="Cognac XO Grande Champagne" class="product-image">
+        </div>
+        <div class="card-body">
+          <h3 class="product-title">Cognac XO Grande Champagne</h3>
+          <p class="product-desc">Элитный французский коньяк 25-летней выдержки в лимузенском дубе. Многогранный букет сафьяна, засахаренного инжира и мускатного ореха.</p>
+          <div class="card-footer">
+            <div class="product-price-wrapper">
+              <span class="price-label" data-i18n="priceLabel">Цена:</span>
+              <span class="product-price">1 450 000 сум</span>
+            </div>
+            <button class="btn-details" data-i18n="btnDetails">Подробнее</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 6.2 Коньяк №2 -->
+      <article class="product-card" data-category="spirit" data-spirit="cognac">
+        <div class="card-badge-container">
+          <span class="card-badge">Коньяк</span>
+          <span class="card-badge card-badge-type">VSOP 10 Лет</span>
+        </div>
+        <div class="card-image-wrapper">
+          <img src="images/spirit_cognac.svg" alt="Cognac VSOP Heritage" class="product-image">
+        </div>
+        <div class="card-body">
+          <h3 class="product-title">Cognac VSOP Heritage Collection</h3>
+          <p class="product-desc">Гармоничный французский коньяк с мягким вкусом ванили, спелых персиков и лесного ореха. Оставляет теплое долгое послевкусие.</p>
+          <div class="card-footer">
+            <div class="product-price-wrapper">
+              <span class="price-label" data-i18n="priceLabel">Цена:</span>
+              <span class="product-price">850 000 сум</span>
+            </div>
+            <button class="btn-details" data-i18n="btnDetails">Подробнее</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 6.3 Коньяк №3 -->
+      <article class="product-card" data-category="spirit" data-spirit="cognac">
+        <div class="card-badge-container">
+          <span class="card-badge">Коньяк</span>
+          <span class="card-badge card-badge-type">Extra Reserve</span>
+        </div>
+        <div class="card-image-wrapper">
+          <img src="images/spirit_cognac.svg" alt="Cognac Imperial Extra" class="product-image">
+        </div>
+        <div class="card-body">
+          <h3 class="product-title">Cognac Imperial Extra Reserve</h3>
+          <p class="product-desc">Коллекционный коньяк в хрустальном графине. Ноты сигарного листа, засахаренной апельсиновой корки и темного шоколада.</p>
+          <div class="card-footer">
+            <div class="product-price-wrapper">
+              <span class="price-label" data-i18n="priceLabel">Цена:</span>
+              <span class="product-price">2 100 000 сум</span>
+            </div>
+            <button class="btn-details" data-i18n="btnDetails">Подробнее</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 6.4 Водка №1 -->
+      <article class="product-card" data-category="spirit" data-spirit="vodka">
+        <div class="card-badge-container">
+          <span class="card-badge">Водка</span>
+          <span class="card-badge card-badge-type">Ultra Lux</span>
+        </div>
+        <div class="card-image-wrapper">
+          <img src="images/spirit_vodka.svg" alt="Imperial Platinum Vodka" class="product-image">
+        </div>
+        <div class="card-body">
+          <h3 class="product-title">Imperial Platinum Crystal Vodka</h3>
+          <p class="product-desc">Водка наивысшей очистки на основе солодового спирта «Альфа» и горной родниковой воды. Проходит фильтрацию через серебро и платину.</p>
+          <div class="card-footer">
+            <div class="product-price-wrapper">
+              <span class="price-label" data-i18n="priceLabel">Цена:</span>
+              <span class="product-price">380 000 сум</span>
+            </div>
+            <button class="btn-details" data-i18n="btnDetails">Подробнее</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 6.5 Водка №2 -->
+      <article class="product-card" data-category="spirit" data-spirit="vodka">
+        <div class="card-badge-container">
+          <span class="card-badge">Водка</span>
+          <span class="card-badge card-badge-type">Premium Gold</span>
+        </div>
+        <div class="card-image-wrapper">
+          <img src="images/spirit_vodka.svg" alt="Gold Leaf Pure Vodka" class="product-image">
+        </div>
+        <div class="card-body">
+          <h3 class="product-title">Gold Leaf Pure Vodka Reserve</h3>
+          <p class="product-desc">Эксклюзивная водка с микрочастицами сусального золота 23 карата. Исключительная мягкость и чистейший классический вкусовой профиль.</p>
+          <div class="card-footer">
+            <div class="product-price-wrapper">
+              <span class="price-label" data-i18n="priceLabel">Цена:</span>
+              <span class="product-price">490 000 сум</span>
+            </div>
+            <button class="btn-details" data-i18n="btnDetails">Подробнее</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 6.6 Водка №3 -->
+      <article class="product-card" data-category="spirit" data-spirit="vodka">
+        <div class="card-badge-container">
+          <span class="card-badge">Водка</span>
+          <span class="card-badge card-badge-type">Classic Craft</span>
+        </div>
+        <div class="card-image-wrapper">
+          <img src="images/spirit_vodka.svg" alt="Legion Vintage Craft Vodka" class="product-image">
+        </div>
+        <div class="card-body">
+          <h3 class="product-title">Legion Vintage Craft Vodka</h3>
+          <p class="product-desc">Фирменная водка сети «Легион», приготовленная по старофранцузским рецептам с добавлением настоя липового цвета и меда.</p>
+          <div class="card-footer">
+            <div class="product-price-wrapper">
+              <span class="price-label" data-i18n="priceLabel">Цена:</span>
+              <span class="product-price">270 000 сум</span>
+            </div>
+            <button class="btn-details" data-i18n="btnDetails">Подробнее</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 6.7 Виски №1 -->
+      <article class="product-card" data-category="spirit" data-spirit="whiskey">
+        <div class="card-badge-container">
+          <span class="card-badge">Виски</span>
+          <span class="card-badge card-badge-type">Single Malt 18</span>
+        </div>
+        <div class="card-image-wrapper">
+          <img src="images/spirit_whiskey.svg" alt="Highland Single Malt 18" class="product-image">
+        </div>
+        <div class="card-body">
+          <h3 class="product-title">Highland Single Malt Scotch 18 Y.O.</h3>
+          <p class="product-desc">Односолодовый шотландский виски 18-летней выдержки в хересных бочках. Дымные ноты торфа, верескового меда и кураги.</p>
+          <div class="card-footer">
+            <div class="product-price-wrapper">
+              <span class="price-label" data-i18n="priceLabel">Цена:</span>
+              <span class="product-price">1 280 000 сум</span>
+            </div>
+            <button class="btn-details" data-i18n="btnDetails">Подробнее</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 6.8 Виски №2 -->
+      <article class="product-card" data-category="spirit" data-spirit="whiskey">
+        <div class="card-badge-container">
+          <span class="card-badge">Виски</span>
+          <span class="card-badge card-badge-type">Bourbon Cask</span>
+        </div>
+        <div class="card-image-wrapper">
+          <img src="images/spirit_whiskey.svg" alt="Kentucky Bourbon Special" class="product-image">
+        </div>
+        <div class="card-body">
+          <h3 class="product-title">Kentucky Small Batch Bourbon</h3>
+          <p class="product-desc">Традиционный американский бурбон глубокого янтарного цвета. Насыщенные тона карамели, обжаренного дуба, карамелизированного банана.</p>
+          <div class="card-footer">
+            <div class="product-price-wrapper">
+              <span class="price-label" data-i18n="priceLabel">Цена:</span>
+              <span class="product-price">690 000 сум</span>
+            </div>
+            <button class="btn-details" data-i18n="btnDetails">Подробнее</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- 6.9 Виски №3 -->
+      <article class="product-card" data-category="spirit" data-spirit="whiskey">
+        <div class="card-badge-container">
+          <span class="card-badge">Виски</span>
+          <span class="card-badge card-badge-type">Blended Malt 12</span>
+        </div>
+        <div class="card-image-wrapper">
+          <img src="images/spirit_whiskey.svg" alt="Royal Crest Blended Malt" class="product-image">
+        </div>
+        <div class="card-body">
+          <h3 class="product-title">Royal Crest Blended Malt 12 Y.O.</h3>
+          <p class="product-desc">Купажированный солодовый виски 12 лет выдержки. Мягкий фруктовый вкус с нюансами ванили, яблочного пирога и пряного коричного дерева.</p>
+          <div class="card-footer">
+            <div class="product-price-wrapper">
+              <span class="price-label" data-i18n="priceLabel">Цена:</span>
+              <span class="product-price">540 000 сум</span>
+            </div>
+            <button class="btn-details" data-i18n="btnDetails">Подробнее</button>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <!-- Product Details Modal Overlay -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-card">
+      <button class="modal-close" id="modalCloseBtn">&times;</button>
+      <div class="modal-image-col">
+        <img src="" alt="" class="modal-image" id="modalImage">
+      </div>
+      <div class="modal-info-col">
+        <h2 class="modal-title" id="modalTitle"></h2>
+        <div class="modal-badge-group">
+          <span class="modal-badge" id="modalCountryBadge"></span>
+          <span class="modal-badge" id="modalCategoryBadge"></span>
+        </div>
+        <div class="modal-price" id="modalPrice"></div>
+        <div class="modal-advantages-box">
+          <h4 class="modal-advantages-title" data-i18n="advantagesTitle">Достоинства напитка:</h4>
+          <p class="modal-desc" id="modalDesc"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Medieval Footer -->
+  <footer class="medieval-footer">
+    <div class="container">
+      <p class="footer-info" data-i18n="infoNotice">
+        Каталог носит информационный характер. Продажа алкогольной продукции осуществляется в специализированных магазинах сети «Легион».
+      </p>
+      <p class="footer-copy" data-i18n="footerText">
+        © Сеть магазинов «Легион». Все права защищены.
+      </p>
+    </div>
+  </footer>
+
+  <!-- DUAL FALLBACK SCRIPT LOADER & INLINE ENGINE -->
+  <script src="js/translations.js"></script>
+  <script src="translations.js"></script>
+  <script src="js/script.js"></script>
+  <script src="script.js"></script>
+
+  <!-- EMBEDDED INLINE SCRIPT BACKUP FOR 100% GITHUB PAGES GUARANTEE -->
+  <script>
+    if (typeof translations === 'undefined') {
+      window.translations = {
+        ru: {
+          siteTitle: "Легион — Сеть магазинов качественного алкоголя",
+          brandName: "ЛЕГИОН",
+          brandTagline: "Сеть магазинов элитных вин и крепких напитков",
+          navWines: "Вина", navSpirits: "Крепкие напитки", navAll: "Все товары",
+          countryAll: "Все страны", countryFrench: "Французские", countrySpanish: "Испанские", countryItalian: "Итальянские", countryMoldovan: "Молдавские", countryGeorgian: "Грузинские",
+          typeAll: "Все виды вин", typeDry: "Сухое", typeSemiSweet: "Полусладкое", typeSweet: "Сладкое", typeSparkling: "Игристое",
+          spiritCognac: "Коньяк", spiritVodka: "Водка", spiritWhiskey: "Виски",
+          searchPlaceholder: "Поиск по названию или описанию...", filterCountryLabel: "Страна происхождения:", filterTypeLabel: "Категория вина:", filterSpiritLabel: "Вид крепкого напитка:",
+          btnDetails: "Подробнее", btnClose: "Закрыть", priceLabel: "Цена:", currency: "сум", advantagesTitle: "Достоинства напитка:",
+          heroTitle: "Изысканная коллекция вин и благородных напитков", heroSubtitle: "Традиции качества и дух французской классики",
+          infoNotice: "Каталог носит информационный характер. Продажа алкогольной продукции осуществляется в специализированных магазинах сети «Легион».",
+          footerText: "© Сеть магазинов «Легион». Все права защищены.",
+          
+        },
+        uz: {
+          siteTitle: "Legion — Sifatli spirtli ichimliklar do'konlari tarmog'i",
+          brandName: "LEGION",
+          brandTagline: "Saralangan vinolar va kuchli ichimliklar do'konlari tarmog'i",
+          navWines: "Vinolar", navSpirits: "Kuchli ichimliklar", navAll: "Barcha mahsulotlar",
+          countryAll: "Barcha mamlakatlar", countryFrench: "Fransuz", countrySpanish: "Ispan", countryItalian: "Italiya", countryMoldovan: "Moldava", countryGeorgian: "Gruziya",
+          typeAll: "Barcha vino turlari", typeDry: "Quruq", typeSemiSweet: "Yarim shirin", typeSweet: "Shirin", typeSparkling: "Kupurchli (Shampan)",
+          spiritCognac: "Konyak", spiritVodka: "Aroq", spiritWhiskey: "Viski",
+          searchPlaceholder: "Nomi yoki tavsifi bo'yicha qidiruv...", filterCountryLabel: "Kelib chiqish mamlakati:", filterTypeLabel: "Vino kategoriyasi:", filterSpiritLabel: "Kuchli ichimlik turi:",
+          btnDetails: "Batafsil", btnClose: "Yopish", priceLabel: "Narxi:", currency: "so'm", advantagesTitle: "Ichimlikning afzalliklari:",
+          heroTitle: "Saralangan vinolar va oliy navli ichimliklar to'plami", heroSubtitle: "Sifat an'analari va Fransuz klassikasi ruhi",
+          infoNotice: "Katalog ma'lumot beruvchi xarakterga ega. Alkogolli mahsulotlarni sotish «Legion» tarmog'ining ixtisoslashtirilgan do'konlarida amalga oshiriladi.",
+          footerText: "© «Legion» do'konlar tarmog'i. Barcha huquqlar himoyalangan.",
+           
+        },
+        en: {
+          siteTitle: "Legion — Premium Liquor Store Chain Catalog",
+          brandName: "LEGION",
+          brandTagline: "Premier Chain of Fine Wines & Fine Spirits",
+          navWines: "Wines", navSpirits: "Spirits", navAll: "All Beverages",
+          countryAll: "All Countries", countryFrench: "French", countrySpanish: "Spanish", countryItalian: "Italian", countryMoldovan: "Moldovan", countryGeorgian: "Georgian",
+          typeAll: "All Wine Types", typeDry: "Dry", typeSemiSweet: "Semi-Sweet", typeSweet: "Sweet", typeSparkling: "Sparkling",
+          spiritCognac: "Cognac", spiritVodka: "Vodka", spiritWhiskey: "Whiskey",
+          searchPlaceholder: "Search beverage name or description...", filterCountryLabel: "Country of Origin:", filterTypeLabel: "Wine Category:", filterSpiritLabel: "Spirits Type:",
+          btnDetails: "Details", btnClose: "Close", priceLabel: "Price:", currency: "so'm", advantagesTitle: "Beverage Highlights:",
+          heroTitle: "Exquisite Collection of Vintage Wines & Fine Spirits", heroSubtitle: "Tradition of Quality & French Medieval Heritage",
+          infoNotice: "This catalog is strictly for informational purposes. Sales are conducted exclusively at specialized 'Legion' store locations.",
+          footerText: "© 'Legion' Liquor Store Chain. All rights reserved.",
+          
+        }
+      };
+    }
+  </script>
+</body>
+</html>
