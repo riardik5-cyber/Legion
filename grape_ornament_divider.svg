@@ -1,33 +1,60 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" width="100%" height="120" fill="none">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" width="100%" height="120" fill="none" preserveAspectRatio="xMidYMid meet">
   <defs>
+    <!-- Симметричный градиент: от тёмного края через светлый центр обратно к тёмному -->
     <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#8B6914"/>
-      <stop offset="25%" stop-color="#D4AF37"/>
-      <stop offset="50%" stop-color="#FFF0A5"/>
-      <stop offset="75%" stop-color="#D4AF37"/>
+      <stop offset="0%"   stop-color="#8B6914"/>
+      <stop offset="25%"  stop-color="#D4AF37"/>
+      <stop offset="50%"  stop-color="#FFF0A5"/>
+      <stop offset="75%"  stop-color="#D4AF37"/>
+      <stop offset="100%" stop-color="#8B6914"/>
+    </linearGradient>
+    <!-- Отдельный симметричный градиент для левой ветви (зеркальный) -->
+    <linearGradient id="goldGradLeft" x1="100%" y1="0%" x2="0%" y2="0%">
+      <stop offset="0%"   stop-color="#8B6914"/>
+      <stop offset="50%"  stop-color="#D4AF37"/>
+      <stop offset="100%" stop-color="#FFF0A5"/>
+    </linearGradient>
+    <linearGradient id="goldGradRight" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#FFF0A5"/>
+      <stop offset="50%"  stop-color="#D4AF37"/>
       <stop offset="100%" stop-color="#8B6914"/>
     </linearGradient>
     <linearGradient id="burgundyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#4A0E17"/>
+      <stop offset="0%"   stop-color="#4A0E17"/>
       <stop offset="100%" stop-color="#2A050B"/>
     </linearGradient>
   </defs>
+
+  <!-- Центральный виноград, ровно по центру viewBox (600, 60) -->
   <g transform="translate(600, 60)">
-    <path d="M -30,-35 C -15,-45 15,-45 30,-35 C 40,-10 35,25 0,45 C -35,25 -40,-10 -30,-35 Z" fill="url(#burgundyGrad)" stroke="url(#goldGrad)" stroke-width="3"/>
+
+    <!-- Центральный декоративный лист винограда -->
+    <path d="M -30,-35 C -15,-45 15,-45 30,-35 C 40,-10 35,25 0,45 C -35,25 -40,-10 -30,-35 Z"
+          fill="url(#burgundyGrad)" stroke="url(#goldGrad)" stroke-width="3"/>
+
+    <!-- Гроздь: ягоды симметрично расположены -->
     <g fill="url(#goldGrad)">
-      <circle cx="0" cy="-15" r="5"/>
-      <circle cx="-6" cy="-7" r="4.5"/>
-      <circle cx="6" cy="-7" r="4.5"/>
-      <circle cx="-11" cy="1" r="4"/>
-      <circle cx="0" cy="1" r="4"/>
-      <circle cx="11" cy="1" r="4"/>
-      <circle cx="-6" cy="9" r="3.5"/>
-      <circle cx="6" cy="9" r="3.5"/>
-      <circle cx="0" cy="17" r="3"/>
-      <circle cx="0" cy="24" r="2.5"/>
+      <circle cx="0"   cy="-15" r="5"/>
+      <circle cx="-6"  cy="-7"  r="4.5"/>
+      <circle cx="6"   cy="-7"  r="4.5"/>
+      <circle cx="-11" cy="1"   r="4"/>
+      <circle cx="0"   cy="1"   r="4"/>
+      <circle cx="11"  cy="1"   r="4"/>
+      <circle cx="-6"  cy="9"   r="3.5"/>
+      <circle cx="6"   cy="9"   r="3.5"/>
+      <circle cx="0"   cy="17"  r="3"/>
+      <circle cx="0"   cy="24"  r="2.5"/>
+      <!-- Усик -->
       <path d="M 0,-15 Q -2,-25 5,-28" stroke="url(#goldGrad)" stroke-width="2" fill="none"/>
     </g>
-    <path d="M -35,-15 C -80,-40 -120,10 -180,-10 C -220,-25 -250,5 -300,-5 C -350,-15 -400,0 -550,0" stroke="url(#goldGrad)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-    <path d="M 35,-15 C 80,-40 120,10 180,-10 C 220,-25 250,5 300,-5 C 350,-15 400,0 550,0" stroke="url(#goldGrad)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+
+    <!-- Левая ветвь — зеркальная (идёт от центра в минус X) -->
+    <path d="M -35,-15 C -80,-40 -120,10 -180,-10 C -220,-25 -250,5 -300,-5 C -350,-15 -400,0 -560,0"
+          stroke="url(#goldGradLeft)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+
+    <!-- Правая ветвь (идёт от центра в плюс X) -->
+    <path d="M 35,-15 C 80,-40 120,10 180,-10 C 220,-25 250,5 300,-5 C 350,-15 400,0 560,0"
+          stroke="url(#goldGradRight)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+
   </g>
 </svg>

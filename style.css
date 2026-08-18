@@ -29,6 +29,10 @@
 }
 
 /* Base Reset & Typography */
+html {
+  overflow-x: hidden;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -229,7 +233,9 @@ button {
 .ornament-divider {
   margin: 20px auto;
   max-width: 600px;
+  width: 100%;
   display: block;
+  overflow: hidden;
 }
 
 /* Search Bar Section */
@@ -673,6 +679,7 @@ button {
   .section-title { font-size: 1.75rem; }
   .hero-title { font-size: 1.75rem; }
   .hero-subtitle { font-size: 1rem; }
+  .ornament-divider { max-width: 100%; }
 }
 
 /* Mobile phones (≤480px) */
