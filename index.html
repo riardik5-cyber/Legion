@@ -62,7 +62,13 @@
     .lang-switcher { display: flex; background: rgba(0, 0, 0, 0.4); border: 1px solid var(--gold-primary); border-radius: 30px; padding: 4px; box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.5); }
     .lang-btn { background: transparent; color: var(--text-muted); font-family: var(--font-heading); font-size: 0.9rem; font-weight: 700; padding: 6px 16px; border-radius: 20px; transition: var(--transition); }
     .lang-btn.active, .lang-btn:hover { background: var(--gold-gradient); color: var(--text-dark); box-shadow: 0 2px 8px rgba(212, 175, 55, 0.5); }
-    .main-nav { display: flex; justify-content: center; padding: 12px 0; gap: 15px; flex-wrap: wrap; }
+    .main-nav { display: flex; justify-content: center; padding: 10px 0; gap: 15px; flex-wrap: wrap; }
+    .main-choice-btn { background: var(--burgundy-gradient); color: var(--gold-light); font-family: var(--font-heading); font-size: 1.25rem; letter-spacing: 2px; text-transform: uppercase; padding: 12px 28px; border: 2px solid var(--gold-primary); border-radius: 30px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6), inset 0 0 10px rgba(212, 175, 55, 0.2); cursor: pointer; transition: var(--transition); display: inline-flex; align-items: center; gap: 12px; margin: 5px auto; outline: none; }
+    .main-choice-btn:hover, .main-choice-btn.active { background: var(--gold-gradient); color: var(--text-dark); border-color: var(--gold-light); box-shadow: 0 6px 22px rgba(212, 175, 55, 0.4); transform: translateY(-2px); }
+    .main-choice-icon { font-size: 1rem; transition: transform 0.3s ease; }
+    .main-choice-btn.active .main-choice-icon { transform: rotate(180deg); }
+    .sub-nav-wrapper { max-height: 0; overflow: hidden; opacity: 0; transition: max-height 0.4s ease, opacity 0.4s ease, margin 0.3s ease; margin-top: 0; }
+    .sub-nav-wrapper.open { max-height: 150px; opacity: 1; margin-top: 10px; }
     .nav-tab { background: rgba(42, 8, 14, 0.8); color: var(--text-light); font-family: var(--font-heading); font-size: 1.1rem; letter-spacing: 1.5px; padding: 10px 24px; border: 1px solid var(--border-gold); border-radius: 4px; position: relative; overflow: hidden; transition: var(--transition); }
     .nav-tab::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--gold-gradient); opacity: 0; transition: var(--transition); }
     .nav-tab:hover, .nav-tab.active { background: #4A0E17; color: var(--gold-light); border-color: var(--gold-primary); box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2); }
@@ -136,7 +142,7 @@
       <div class="header-top-bar">
         <!-- Logo & Brand Title -->
         <div class="brand-wrapper">
-          <img src="logo.png" alt="Легион Герб" class="brand-logo">
+          <img src="images/logo.png" alt="Легион Герб" class="brand-logo">
           <div class="brand-titles">
             <h1 data-i18n="brandName">ЛЕГИОН</h1>
             <p data-i18n="brandTagline">Сеть магазинов элитных вин и крепких напитков</p>
@@ -151,11 +157,20 @@
         </div>
       </div>
 
-      <!-- Main Section Navigation Tabs -->
-      <nav class="main-nav">
-        <button class="nav-tab active" data-category="wines" data-i18n="navWines">Вина</button>
-        <button class="nav-tab" data-category="spirits" data-i18n="navSpirits">Крепкие напитки</button>
-      </nav>
+      <!-- Main Section Navigation Tabs: Ваш выбор напитков -->
+      <div class="nav-wrapper" style="text-align: center; padding: 15px 0 5px;">
+        <button class="main-choice-btn" id="mainChoiceBtn">
+          <span>🍷</span>
+          <span data-i18n="navChoice">Ваш выбор напитков</span>
+          <span class="main-choice-icon">▾</span>
+        </button>
+        <div class="sub-nav-wrapper" id="subNavWrapper">
+          <nav class="main-nav">
+            <button class="nav-tab" data-category="wines" data-i18n="navWines">Вина</button>
+            <button class="nav-tab" data-category="spirits" data-i18n="navSpirits">Крепкие напитки</button>
+          </nav>
+        </div>
+      </div>
     </div>
   </header>
 
@@ -164,7 +179,7 @@
     <div class="container hero-content">
       <h2 class="hero-title" data-i18n="heroTitle">Изысканная коллекция вин и благородных напитков</h2>
       <p class="hero-subtitle" data-i18n="heroSubtitle">Традиции качества и дух французской классики</p>
-      <img src="grape_ornament_divider.svg" alt="Виноградный орнамент" class="ornament-divider">
+      <img src="images/grape_ornament_divider.svg" alt="Виноградный орнамент" class="ornament-divider">
     </div>
   </section>
 
@@ -172,7 +187,7 @@
   <main class="container">
     
     <!-- Search Bar -->
-    <section class="search-section">
+    <section class="search-section" id="searchSection">
       <div class="search-box">
         <span class="search-icon">🔍</span>
         <input type="text" id="searchInput" class="search-input" placeholder="Поиск по названию или описанию...">
@@ -180,13 +195,14 @@
     </section>
 
     <!-- Interactive Sub-Filters -->
-    <section class="filter-controls">
+    <section class="filter-controls" id="filterControls">
       
-      <!-- Country Subsections for Wines -->
+      <!-- Country Subsections -->
       <div class="filter-group" id="countryFilterWrapper">
         <span class="filter-label" data-i18n="filterCountryLabel">Страна происхождения:</span>
         <div class="badge-wrapper">
-          <button class="badge-btn active" data-country="french" data-i18n="countryFrench">Французские</button>
+          <button class="badge-btn" data-country="all" data-i18n="countryAll">Все страны</button>
+          <button class="badge-btn" data-country="french" data-i18n="countryFrench">Французские</button>
           <button class="badge-btn" data-country="spanish" data-i18n="countrySpanish">Испанские</button>
           <button class="badge-btn" data-country="italian" data-i18n="countryItalian">Итальянские</button>
           <button class="badge-btn" data-country="moldovan" data-i18n="countryMoldovan">Молдавские</button>
@@ -198,7 +214,8 @@
       <div class="filter-group" id="typeFilterWrapper">
         <span class="filter-label" data-i18n="filterTypeLabel">Категория вина:</span>
         <div class="badge-wrapper">
-          <button class="badge-btn active" data-wine-type="dry" data-i18n="typeDry">Сухое</button>
+          <button class="badge-btn" data-wine-type="all" data-i18n="typeAll">Все категории</button>
+          <button class="badge-btn" data-wine-type="dry" data-i18n="typeDry">Сухое</button>
           <button class="badge-btn" data-wine-type="semisweet" data-i18n="typeSemiSweet">Полусладкое</button>
           <button class="badge-btn" data-wine-type="sweet" data-i18n="typeSweet">Сладкое</button>
           <button class="badge-btn" data-wine-type="sparkling" data-i18n="typeSparkling">Игристое</button>
@@ -209,7 +226,8 @@
       <div class="filter-group" id="spiritsFilterWrapper">
         <span class="filter-label" data-i18n="filterSpiritLabel">Вид крепкого напитка:</span>
         <div class="badge-wrapper">
-          <button class="badge-btn active" data-spirit-type="cognac" data-i18n="spiritCognac">Коньяк</button>
+          <button class="badge-btn" data-spirit-type="all" data-i18n="spiritAll">Все виды</button>
+          <button class="badge-btn" data-spirit-type="cognac" data-i18n="spiritCognac">Коньяк</button>
           <button class="badge-btn" data-spirit-type="vodka" data-i18n="spiritVodka">Водка</button>
           <button class="badge-btn" data-spirit-type="whiskey" data-i18n="spiritWhiskey">Виски</button>
         </div>
@@ -219,7 +237,7 @@
 
 
     <!-- Section Title -->
-    <div class="section-header">
+    <div class="section-header" id="sectionHeader">
       <h2 class="section-title">Каталог Продукции «Легион»</h2>
     </div>
 
@@ -237,7 +255,7 @@
           <span class="card-badge card-badge-type" data-i18n="typeDry">Сухое</span>
         </div>
         <div class="card-image-wrapper">
-          <img src="wine_french.png" alt="Château de l'Étoile Bordeaux" class="product-image">
+          <img src="images/wine_french.png" alt="Château de l'Étoile Bordeaux" class="product-image">
         </div>
         <div class="card-body">
           <h3 class="product-title">Château de l'Étoile Margaux</h3>
@@ -259,7 +277,7 @@
           <span class="card-badge card-badge-type" data-i18n="typeSemiSweet">Полусладкое</span>
         </div>
         <div class="card-image-wrapper">
-          <img src="wine_french.png" alt="Rosé d'Anjou Val de Loire" class="product-image">
+          <img src="images/wine_french.png" alt="Rosé d'Anjou Val de Loire" class="product-image">
         </div>
         <div class="card-body">
           <h3 class="product-title">Rosé d'Anjou Val de Loire</h3>
@@ -281,7 +299,7 @@
           <span class="card-badge card-badge-type" data-i18n="typeSweet">Сладкое</span>
         </div>
         <div class="card-image-wrapper">
-          <img src="wine_french.png" alt="Sauternes Grand Reserve" class="product-image">
+          <img src="images/wine_french.png" alt="Sauternes Grand Reserve" class="product-image">
         </div>
         <div class="card-body">
           <h3 class="product-title">Sauternes Grand Reserve</h3>
@@ -303,7 +321,7 @@
           <span class="card-badge card-badge-type" data-i18n="typeSparkling">Игристое</span>
         </div>
         <div class="card-image-wrapper">
-          <img src="wine_french.png" alt="Champagne Royal Brut" class="product-image">
+          <img src="images/wine_french.png" alt="Champagne Royal Brut" class="product-image">
         </div>
         <div class="card-body">
           <h3 class="product-title">Champagne Royal Brut</h3>
@@ -330,7 +348,7 @@
           <span class="card-badge card-badge-type" data-i18n="typeDry">Сухое</span>
         </div>
         <div class="card-image-wrapper">
-          <img src="wine_spanish.svg" alt="Rioja Gran Reserva" class="product-image">
+          <img src="images/wine_spanish.svg" alt="Rioja Gran Reserva" class="product-image">
         </div>
         <div class="card-body">
           <h3 class="product-title">Rioja Gran Reserva Vintage</h3>
@@ -352,7 +370,7 @@
           <span class="card-badge card-badge-type" data-i18n="typeSemiSweet">Полусладкое</span>
         </div>
         <div class="card-image-wrapper">
-          <img src="wine_spanish.svg" alt="Sangre de Toro Semi-Dulce" class="product-image">
+          <img src="images/wine_spanish.svg" alt="Sangre de Toro Semi-Dulce" class="product-image">
         </div>
         <div class="card-body">
           <h3 class="product-title">Sangre de Toro Semi-Dulce</h3>
@@ -374,7 +392,7 @@
           <span class="card-badge card-badge-type" data-i18n="typeSweet">Сладкое</span>
         </div>
         <div class="card-image-wrapper">
-          <img src="wine_spanish.svg" alt="Pedro Ximénez Solera" class="product-image">
+          <img src="images/wine_spanish.svg" alt="Pedro Ximénez Solera" class="product-image">
         </div>
         <div class="card-body">
           <h3 class="product-title">Pedro Ximénez Solera Sherry</h3>
@@ -396,7 +414,7 @@
           <span class="card-badge card-badge-type" data-i18n="typeSparkling">Игристое</span>
         </div>
         <div class="card-image-wrapper">
-          <img src="wine_spanish.svg" alt="Cava Freixenet Brut" class="product-image">
+          <img src="images/wine_spanish.svg" alt="Cava Freixenet Brut" class="product-image">
         </div>
         <div class="card-body">
           <h3 class="product-title">Cava Premium Reserva Brut</h3>
@@ -423,7 +441,7 @@
           <span class="card-badge card-badge-type" data-i18n="typeDry">Сухое</span>
         </div>
         <div class="card-image-wrapper">
-          <img src="wine_italian.svg" alt="Chianti Classico Riserva" class="product-image">
+          <img src="images/wine_italian.svg" alt="Chianti Classico Riserva" class="product-image">
         </div>
         <div class="card-body">
           <h3 class="product-title">Chianti Classico Riserva DOCG</h3>
@@ -445,7 +463,7 @@
           <span class="card-badge card-badge-type" data-i18n="typeSemiSweet">Полусладкое</span>
         </div>
         <div class="card-image-wrapper">
-          <img src="wine_italian.svg" alt="Lambrusco dell'Emilia Rosso" class="product-image">
+          <img src="images/wine_italian.svg" alt="Lambrusco dell'Emilia Rosso" class="product-image">
         </div>
         <div class="card-body">
           <h3 class="product-title">Lambrusco dell'Emilia Amabile</h3>
@@ -467,7 +485,7 @@
           <span class="card-badge card-badge-type" data-i18n="typeSweet">Сладкое</span>
         </div>
         <div class="card-image-wrapper">
-          <img src="wine_italian.svg" alt="Vin Santo del Chianti" class="product-image">
+          <img src="images/wine_italian.svg" alt="Vin Santo del Chianti" class="product-image">
         </div>
         <div class="card-body">
           <h3 class="product-title">Vin Santo del Chianti Sweet</h3>
@@ -489,7 +507,7 @@
           <span class="card-badge card-badge-type" data-i18n="typeSparkling">Игристое</span>
         </div>
         <div class="card-image-wrapper">
-          <img src="wine_italian.svg" alt="Prosecco Valdobbiadene" class="product-image">
+          <img src="images/wine_italian.svg" alt="Prosecco Valdobbiadene" class="product-image">
         </div>
         <div class="card-body">
           <h3 class="product-title">Prosecco Superiore Valdobbiadene</h3>
@@ -516,7 +534,7 @@
           <span class="card-badge card-badge-type" data-i18n="typeDry">Сухое</span>
         </div>
         <div class="card-image-wrapper">
-          <img src="wine_moldovan.svg" alt="Negru de Purcari Vintage" class="product-image">
+          <img src="images/wine_moldovan.svg" alt="Negru de Purcari Vintage" class="product-image">
         </div>
         <div class="card-body">
           <h3 class="product-title">Negru de Purcari Vintage</h3>
@@ -538,7 +556,7 @@
           <span class="card-badge card-badge-type" data-i18n="typeSemiSweet">Полусладкое</span>
         </div>
         <div class="card-image-wrapper">
-          <img src="wine_moldovan.svg" alt="Muscat Moldovenesc Semi-Sweet" class="product-image">
+          <img src="images/wine_moldovan.svg" alt="Muscat Moldovenesc Semi-Sweet" class="product-image">
         </div>
         <div class="card-body">
           <h3 class="product-title">Muscat Moldovenesc Reserve</h3>
@@ -560,7 +578,7 @@
           <span class="card-badge card-badge-type" data-i18n="typeSweet">Сладкое</span>
         </div>
         <div class="card-image-wrapper">
-          <img src="wine_moldovan.svg" alt="Kagor Pastoral Sweet" class="product-image">
+          <img src="images/wine_moldovan.svg" alt="Kagor Pastoral Sweet" class="product-image">
         </div>
         <div class="card-body">
           <h3 class="product-title">Kagor Pastoral Sweet Dessert</h3>
@@ -582,7 +600,7 @@
           <span class="card-badge card-badge-type" data-i18n="typeSparkling">Игристое</span>
         </div>
         <div class="card-image-wrapper">
-          <img src="wine_moldovan.svg" alt="Cricova Spumant Clasic" class="product-image">
+          <img src="images/wine_moldovan.svg" alt="Cricova Spumant Clasic" class="product-image">
         </div>
         <div class="card-body">
           <h3 class="product-title">Cricova Spumant Clasic Brut</h3>
@@ -609,7 +627,7 @@
           <span class="card-badge card-badge-type" data-i18n="typeDry">Сухое</span>
         </div>
         <div class="card-image-wrapper">
-          <img src="wine_georgian.svg" alt="Saperavi Qvevri Dry" class="product-image">
+          <img src="images/wine_georgian.svg" alt="Saperavi Qvevri Dry" class="product-image">
         </div>
         <div class="card-body">
           <h3 class="product-title">Saperavi Qvevri Vintage</h3>
@@ -631,7 +649,7 @@
           <span class="card-badge card-badge-type" data-i18n="typeSemiSweet">Полусладкое</span>
         </div>
         <div class="card-image-wrapper">
-          <img src="wine_georgian.svg" alt="Kindzmarauli Reserve" class="product-image">
+          <img src="images/wine_georgian.svg" alt="Kindzmarauli Reserve" class="product-image">
         </div>
         <div class="card-body">
           <h3 class="product-title">Kindzmarauli Authentic Reserve</h3>
@@ -653,7 +671,7 @@
           <span class="card-badge card-badge-type" data-i18n="typeSweet">Сладкое</span>
         </div>
         <div class="card-image-wrapper">
-          <img src="wine_georgian.svg" alt="Khvanchkara Royal Sweet" class="product-image">
+          <img src="images/wine_georgian.svg" alt="Khvanchkara Royal Sweet" class="product-image">
         </div>
         <div class="card-body">
           <h3 class="product-title">Khvanchkara Royal Premium</h3>
@@ -675,7 +693,7 @@
           <span class="card-badge card-badge-type" data-i18n="typeSparkling">Игристое</span>
         </div>
         <div class="card-image-wrapper">
-          <img src="wine_georgian.svg" alt="Bagrationi Classic Brut" class="product-image">
+          <img src="images/wine_georgian.svg" alt="Bagrationi Classic Brut" class="product-image">
         </div>
         <div class="card-body">
           <h3 class="product-title">Bagrationi 1882 Classic Brut</h3>
@@ -696,13 +714,13 @@
            =================================================================== -->
 
       <!-- 6.1 Коньяк №1 -->
-      <article class="product-card" data-category="spirit" data-spirit="cognac">
+      <article class="product-card" data-category="spirit" data-country="french" data-spirit="cognac">
         <div class="card-badge-container">
           <span class="card-badge" data-i18n="badgeCognac">Коньяк</span>
           <span class="card-badge card-badge-type">XO 25 Лет</span>
         </div>
         <div class="card-image-wrapper">
-          <img src="spirit_cognac.svg" alt="Cognac XO Grande Champagne" class="product-image">
+          <img src="images/spirit_cognac.svg" alt="Cognac XO Grande Champagne" class="product-image">
         </div>
         <div class="card-body">
           <h3 class="product-title">Cognac XO Grande Champagne</h3>
@@ -718,13 +736,13 @@
       </article>
 
       <!-- 6.2 Коньяк №2 -->
-      <article class="product-card" data-category="spirit" data-spirit="cognac">
+      <article class="product-card" data-category="spirit" data-country="french" data-spirit="cognac">
         <div class="card-badge-container">
           <span class="card-badge" data-i18n="badgeCognac">Коньяк</span>
           <span class="card-badge card-badge-type">VSOP 10 Лет</span>
         </div>
         <div class="card-image-wrapper">
-          <img src="spirit_cognac.svg" alt="Cognac VSOP Heritage" class="product-image">
+          <img src="images/spirit_cognac.svg" alt="Cognac VSOP Heritage" class="product-image">
         </div>
         <div class="card-body">
           <h3 class="product-title">Cognac VSOP Heritage Collection</h3>
@@ -740,13 +758,13 @@
       </article>
 
       <!-- 6.3 Коньяк №3 -->
-      <article class="product-card" data-category="spirit" data-spirit="cognac">
+      <article class="product-card" data-category="spirit" data-country="french" data-spirit="cognac">
         <div class="card-badge-container">
           <span class="card-badge" data-i18n="badgeCognac">Коньяк</span>
           <span class="card-badge card-badge-type">Extra Reserve</span>
         </div>
         <div class="card-image-wrapper">
-          <img src="spirit_cognac.svg" alt="Cognac Imperial Extra" class="product-image">
+          <img src="images/spirit_cognac.svg" alt="Cognac Imperial Extra" class="product-image">
         </div>
         <div class="card-body">
           <h3 class="product-title">Cognac Imperial Extra Reserve</h3>
@@ -762,13 +780,13 @@
       </article>
 
       <!-- 6.4 Водка №1 -->
-      <article class="product-card" data-category="spirit" data-spirit="vodka">
+      <article class="product-card" data-category="spirit" data-country="french" data-spirit="vodka">
         <div class="card-badge-container">
           <span class="card-badge" data-i18n="badgeVodka">Водка</span>
           <span class="card-badge card-badge-type">Ultra Lux</span>
         </div>
         <div class="card-image-wrapper">
-          <img src="spirit_vodka.svg" alt="Imperial Platinum Vodka" class="product-image">
+          <img src="images/spirit_vodka.svg" alt="Imperial Platinum Vodka" class="product-image">
         </div>
         <div class="card-body">
           <h3 class="product-title">Imperial Platinum Crystal Vodka</h3>
@@ -784,13 +802,13 @@
       </article>
 
       <!-- 6.5 Водка №2 -->
-      <article class="product-card" data-category="spirit" data-spirit="vodka">
+      <article class="product-card" data-category="spirit" data-country="spanish" data-spirit="vodka">
         <div class="card-badge-container">
           <span class="card-badge" data-i18n="badgeVodka">Водка</span>
           <span class="card-badge card-badge-type">Premium Gold</span>
         </div>
         <div class="card-image-wrapper">
-          <img src="spirit_vodka.svg" alt="Gold Leaf Pure Vodka" class="product-image">
+          <img src="images/spirit_vodka.svg" alt="Gold Leaf Pure Vodka" class="product-image">
         </div>
         <div class="card-body">
           <h3 class="product-title">Gold Leaf Pure Vodka Reserve</h3>
@@ -806,13 +824,13 @@
       </article>
 
       <!-- 6.6 Водка №3 -->
-      <article class="product-card" data-category="spirit" data-spirit="vodka">
+      <article class="product-card" data-category="spirit" data-country="italian" data-spirit="vodka">
         <div class="card-badge-container">
           <span class="card-badge" data-i18n="badgeVodka">Водка</span>
           <span class="card-badge card-badge-type">Classic Craft</span>
         </div>
         <div class="card-image-wrapper">
-          <img src="spirit_vodka.svg" alt="Legion Vintage Craft Vodka" class="product-image">
+          <img src="images/spirit_vodka.svg" alt="Legion Vintage Craft Vodka" class="product-image">
         </div>
         <div class="card-body">
           <h3 class="product-title">Legion Vintage Craft Vodka</h3>
@@ -828,13 +846,13 @@
       </article>
 
       <!-- 6.7 Виски №1 -->
-      <article class="product-card" data-category="spirit" data-spirit="whiskey">
+      <article class="product-card" data-category="spirit" data-country="moldovan" data-spirit="whiskey">
         <div class="card-badge-container">
           <span class="card-badge" data-i18n="badgeWhiskey">Виски</span>
           <span class="card-badge card-badge-type">Single Malt 18</span>
         </div>
         <div class="card-image-wrapper">
-          <img src="spirit_whiskey.svg" alt="Highland Single Malt 18" class="product-image">
+          <img src="images/spirit_whiskey.svg" alt="Highland Single Malt 18" class="product-image">
         </div>
         <div class="card-body">
           <h3 class="product-title">Highland Single Malt Scotch 18 Y.O.</h3>
@@ -850,13 +868,13 @@
       </article>
 
       <!-- 6.8 Виски №2 -->
-      <article class="product-card" data-category="spirit" data-spirit="whiskey">
+      <article class="product-card" data-category="spirit" data-country="spanish" data-spirit="whiskey">
         <div class="card-badge-container">
           <span class="card-badge" data-i18n="badgeWhiskey">Виски</span>
           <span class="card-badge card-badge-type">Bourbon Cask</span>
         </div>
         <div class="card-image-wrapper">
-          <img src="spirit_whiskey.svg" alt="Kentucky Bourbon Special" class="product-image">
+          <img src="images/spirit_whiskey.svg" alt="Kentucky Bourbon Special" class="product-image">
         </div>
         <div class="card-body">
           <h3 class="product-title">Kentucky Small Batch Bourbon</h3>
@@ -872,13 +890,13 @@
       </article>
 
       <!-- 6.9 Виски №3 -->
-      <article class="product-card" data-category="spirit" data-spirit="whiskey">
+      <article class="product-card" data-category="spirit" data-country="georgian" data-spirit="whiskey">
         <div class="card-badge-container">
           <span class="card-badge" data-i18n="badgeWhiskey">Виски</span>
           <span class="card-badge card-badge-type">Blended Malt 12</span>
         </div>
         <div class="card-image-wrapper">
-          <img src="spirit_whiskey.svg" alt="Royal Crest Blended Malt" class="product-image">
+          <img src="images/spirit_whiskey.svg" alt="Royal Crest Blended Malt" class="product-image">
         </div>
         <div class="card-body">
           <h3 class="product-title">Royal Crest Blended Malt 12 Y.O.</h3>
@@ -931,9 +949,7 @@
   </footer>
 
   <!-- DUAL FALLBACK SCRIPT LOADER & INLINE ENGINE -->
-  <script src="js/translations.js"></script>
   <script src="translations.js"></script>
-  <script src="js/script.js"></script>
   <script src="script.js"></script>
 
   <!-- EMBEDDED INLINE SCRIPT BACKUP FOR 100% GITHUB PAGES GUARANTEE -->

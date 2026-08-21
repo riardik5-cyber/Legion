@@ -6,6 +6,7 @@ const translations = {
     siteTitle: "Легион — Сеть магазинов качественного алкоголя",
     brandName: "ЛЕГИОН",
     brandTagline: "Сеть магазинов элитных вин и крепких напитков",
+    navChoice: "Ваш выбор напитков",
     navWines: "Вина",
     navSpirits: "Крепкие напитки",
     navAll: "Все товары",
@@ -29,13 +30,14 @@ const translations = {
     badgeWhiskey: "Виски",
     
     // Wine Types
-    typeAll: "Все виды вин",
+    typeAll: "Все категории",
     typeDry: "Сухое",
     typeSemiSweet: "Полусладкое",
     typeSweet: "Сладкое",
     typeSparkling: "Игристое",
 
     // Spirits Subsections
+    spiritAll: "Все виды",
     spiritCognac: "Коньяк",
     spiritVodka: "Водка",
     spiritWhiskey: "Виски",
@@ -105,6 +107,7 @@ const translations = {
     siteTitle: "Legion — Sifatli spirtli ichimliklar do'konlari tarmog'i",
     brandName: "LEGION",
     brandTagline: "Saralangan vinolar va kuchli ichimliklar do'konlari tarmog'i",
+    navChoice: "Ichimliklar tanlovingiz",
     navWines: "Vinolar",
     navSpirits: "Kuchli ichimliklar",
     navAll: "Barcha mahsulotlar",
@@ -128,13 +131,14 @@ const translations = {
     badgeWhiskey: "Viski",
     
     // Wine Types
-    typeAll: "Barcha vino turlari",
+    typeAll: "Barcha kategoriyalar",
     typeDry: "Quruq",
     typeSemiSweet: "Yarim shirin",
     typeSweet: "Shirin",
     typeSparkling: "Kupurchli (Shampan)",
 
     // Spirits Subsections
+    spiritAll: "Barcha turlar",
     spiritCognac: "Konyak",
     spiritVodka: "Aroq",
     spiritWhiskey: "Viski",
@@ -204,6 +208,7 @@ const translations = {
     siteTitle: "Legion — Premium Liquor Store Chain Catalog",
     brandName: "LEGION",
     brandTagline: "Premier Chain of Fine Wines & Fine Spirits",
+    navChoice: "Your Choice of Beverages",
     navWines: "Wines",
     navSpirits: "Spirits",
     navAll: "All Beverages",
@@ -227,13 +232,14 @@ const translations = {
     badgeWhiskey: "Whiskey",
     
     // Wine Types
-    typeAll: "All Wine Types",
+    typeAll: "All Categories",
     typeDry: "Dry",
     typeSemiSweet: "Semi-Sweet",
     typeSweet: "Sweet",
     typeSparkling: "Sparkling",
 
     // Spirits Subsections
+    spiritAll: "All Types",
     spiritCognac: "Cognac",
     spiritVodka: "Vodka",
     spiritWhiskey: "Whiskey",
